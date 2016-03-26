@@ -1,0 +1,22 @@
+{
+  "name": "playlistdc",
+  "env":{
+    "DJANGO_SETTINGS_MODULE":{
+      "value": "playlistdc.settings"
+    },
+    "SECRET_KEY": {
+      "generator": "secret"
+    }
+  },
+  "addons":[
+    "heroku-postgresql:hobby-dev"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-python"
+    }
+  ]
+}

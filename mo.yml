@@ -1,0 +1,4 @@
+domain: playlistdc.herokuapp.com
+heroku:
+  staging: playlistdc-staging
+  production: playlistdc
