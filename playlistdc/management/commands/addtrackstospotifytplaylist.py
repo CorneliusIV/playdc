@@ -5,7 +5,7 @@ import spotipy.util as util
 
 from django.core.management.base import BaseCommand
 
-from playlists.models import Song, Show
+from playlistdc.models import Song, Show
 
 
 class Command(BaseCommand):

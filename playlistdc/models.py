@@ -18,8 +18,12 @@ class Artist(models.Model):
     def __str__(self):
             return self.name
 
+    @property
+    def get_song(self):
+        return Song.objects.filter(artist_id=self.pk).first()
+
     class Meta:
-        verbose_name = _('Name')
+        verbose_name = _('Artist')
 
 
 class Venue(models.Model):
@@ -58,6 +62,10 @@ class Song(models.Model):
         null=True,
         blank=True,)
     spotify_track_id = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,)
+    preview = models.CharField(
         max_length=255,
         null=True,
         blank=True,)

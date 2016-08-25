@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 from bs4 import BeautifulSoup
 import urllib
 
-from playlists.models import Artist, Venue
+from playlistdc.models import Artist, Venue
 
 
 class Command(BaseCommand):

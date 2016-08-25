@@ -3,7 +3,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 import urllib.request
 
-from playlists.models import Artist, Show
+from playlistdc.models import Artist, Show
 
 
 class Command(BaseCommand):
@@ -35,7 +35,7 @@ class Command(BaseCommand):
             for date in event.find_all(class_='dates'):
                 date = date.string
                 if date:
-                    date = datetime.strptime('2015 ' + date, '%Y %a %m/%d')
+                    date = datetime.strptime('2016 ' + date, '%Y %a %m/%d')
                 Show.objects.update_or_create(
                     title=title,
                     artist=artist,

@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 import spotipy
 
-from playlists.models import Artist
+from playlistdc.models import Artist
 
 
 class Command(BaseCommand):

@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 import spotipy
 
-from playlists.models import Artist, Song
+from playlistdc.models import Artist, Song
 
 
 class Command(BaseCommand):
@@ -22,7 +22,8 @@ class Command(BaseCommand):
                         Song.objects.update_or_create(
                             title=t['name'],
                             artist=artist,
-                            spotify_track_id=t['uri']
+                            spotify_track_id=t['uri'],
+                            preview=t['preview_url']
                         )
                         # artist.spotify_id = t['uri']
                         # artist.save()
