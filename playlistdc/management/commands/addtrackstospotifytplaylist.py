@@ -15,7 +15,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         username = 'koolexposure'
         scope = 'playlist-modify-public'
-        playlist_id = 'spotify:user:koolexposure:playlist:2STrNLJzvaHGWgU2SIwYZa'
+        playlist_id = 'spotify:user:koolexposure:playlist:1THotejBefoXPJoEFVKPhG'
 
         token = util.prompt_for_user_token(username, scope)
         if token:

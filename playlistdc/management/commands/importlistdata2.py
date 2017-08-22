@@ -12,11 +12,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         r = urllib.request.urlopen('http://www.930.com/').read()
-        soup = BeautifulSoup(r)
+        soup = BeautifulSoup(r, 'html.parser')
         # soup = BeautifulSoup(open("test.html"))
-        for event in soup.find_all(class_='list-view-details vevent'):
+        show_list = soup.find(id='upcoming-listview')
+        for event in show_list.select('div.list-view-item'):
             title = ""
-            for headliner in event.find_all(class_='headliners summary'):
+            event_details = event.find(class_='list-view-details vevent')
+            for headliner in event_details.find_all(class_='headliners summary'):
                 artist_name = headliner.a.string
                 artist, created = Artist.objects.update_or_create(
                     name=artist_name)
@@ -32,11 +34,12 @@ class Command(BaseCommand):
                     title += ' ' + description_desc
             print(title)
 
-            for date in event.find_all(class_='dates'):
-                date = date.string
+            for date in event.select('div.list-view-details.vevent > h2.dates'):
+                date = date.text
+
                 if date:
-                    date = datetime.strptime('2016 ' + date, '%Y %a %m/%d')
-                Show.objects.update_or_create(
-                    title=title,
-                    artist=artist,
-                    date=date)
+                    date = datetime.strptime(date + ' 2017', '%a %d %b %Y')
+                    Show.objects.update_or_create(
+                        title=title,
+                        artist=artist,
+                        date=date)

@@ -130,3 +130,8 @@ RQ_QUEUES = {
         'URL': config('REDIS_URL', default='redis://localhost:6379/0'),
     },
 }
+
+# Spotify
+SPOTIPY_CLIENT_ID = config('SPOTIPY_CLIENT_ID')
+SPOTIPY_CLIENT_SECRET = config('SPOTIPY_CLIENT_SECRET')
+SPOTIPY_REDIRECT_URI = config('SPOTIPY_REDIRECT_URI')

@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 import spotipy
+import spotipy.util as util
 
 from playlistdc.models import Artist, Song
 
@@ -9,11 +10,16 @@ class Command(BaseCommand):
     help = 'Grab IDs from Spotify'
 
     def handle(self, *args, **options):
-        spotify = spotipy.Spotify()
+        username = 'koolexposure'
+        scope = 'playlist-modify-public'
+
+        token = util.prompt_for_user_token(username, scope)
+        if token:
+            sp = spotipy.Spotify(auth=token)
         artists = Artist.objects.all()
         for artist in artists:
             if artist.spotify_id:
-                sp_track = spotify.artist_top_tracks(artist.spotify_id)
+                sp_track = sp.artist_top_tracks(artist.spotify_id)
                 if sp_track:
                     for t in (sp_track['tracks'])[:1]:
                         print(artist.name)
