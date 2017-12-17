@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand
 
 class Command(BaseCommand):
     args = ''
-    help = 'Grab IDs from Spotify'
+    help = 'Create Playlist'
 
     def handle(self, *args, **options):
         username = 'koolexposure'

@@ -1,11 +1,9 @@
 from django.db import models
+from model_utils.models import TimeStampedModel
 from django.utils.translation import ugettext_lazy as _
 
 
-# Create your models here.
-
-
-class Artist(models.Model):
+class Artist(TimeStampedModel):
     name = models.CharField(
         max_length=255,
         null=True,
@@ -26,7 +24,7 @@ class Artist(models.Model):
         verbose_name = _('Artist')
 
 
-class Venue(models.Model):
+class Venue(TimeStampedModel):
     name = models.CharField(
         max_length=255,
         null=True,
@@ -37,26 +35,31 @@ class Venue(models.Model):
         blank=True,)
 
 
-class Show(models.Model):
+class Show(TimeStampedModel):
     title = models.TextField(
         null=True,
         blank=True,)
-    artist = models.ForeignKey(Artist)
+    artist = models.ForeignKey(
+        Artist,
+        on_delete=models.CASCADE,)
     date = models.DateTimeField(
         blank=True,
         null=True)
     venue = models.ForeignKey(
         Venue,
+        on_delete=models.SET_NULL,
         blank=True,
         null=True)
 
 
-class Song(models.Model):
+class Song(TimeStampedModel):
     title = models.CharField(
         max_length=255,
         null=True,
         blank=True,)
-    artist = models.ForeignKey(Artist)
+    artist = models.ForeignKey(
+        Artist,
+        on_delete=models.CASCADE,)
     album = models.CharField(
         max_length=255,
         null=True,

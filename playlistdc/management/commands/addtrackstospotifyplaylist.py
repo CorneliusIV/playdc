@@ -10,12 +10,12 @@ from playlistdc.models import Song, Show
 
 class Command(BaseCommand):
     args = ''
-    help = 'Grab IDs from Spotify'
+    help = 'Add songs to playlist'
 
     def handle(self, *args, **options):
         username = 'koolexposure'
         scope = 'playlist-modify-public'
-        playlist_id = 'spotify:user:koolexposure:playlist:1THotejBefoXPJoEFVKPhG'
+        playlist_id = 'spotify:user:koolexposure:playlist:0kDGidoe1MnfviZ97aRbPe'
 
         token = util.prompt_for_user_token(username, scope)
         if token:

@@ -24,7 +24,7 @@ PROJECT_ROOT = os.path.dirname(BASE_DIR)
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='',
                        cast=lambda v: [s.strip() for s in v.split(',')])
@@ -32,31 +32,38 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='',
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_rq',
     'playlistdc'
-)
+]
 
-if DEBUG:
-    INSTALLED_APPS += ('debug_toolbar',)
 
-INSTALLED_APPS += ('django_rq',)
-
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+]
+
+
+if config('DEBUG', cast=bool, default=DEBUG):
+
+    INSTALLED_APPS.extend([
+        'debug_toolbar',
+    ])
+
+    MIDDLEWARE.append(
+        'debug_toolbar.middleware.DebugToolbarMiddleware')
+
 
 ROOT_URLCONF = 'playlistdc.urls'
 
@@ -92,11 +99,11 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
 USE_I18N = True
-USE_L10N = True
-USE_TZ = True
+
+TIME_ZONE = 'America/New_York'
+USE_L10N = False
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/

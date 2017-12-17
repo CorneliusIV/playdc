@@ -7,7 +7,7 @@ from playlistdc.models import Artist, Song
 
 class Command(BaseCommand):
     args = ''
-    help = 'Grab IDs from Spotify'
+    help = 'Grab Track IDs from Spotify'
 
     def handle(self, *args, **options):
         username = 'koolexposure'
